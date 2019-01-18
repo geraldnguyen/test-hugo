@@ -1,0 +1,40 @@
+#! /usr/bin/env node
+
+const meow = require('meow');
+const tester = require('../src/index');
+
+const cli = meow(`
+	Usage
+	  $ test-hugo <options>
+
+	Options
+    --add-snapshot <PATH>
+    --htmlproofer <true|false>
+    --compare-snapshot <true|false>
+
+`, {
+	flags: {
+		"add-snapshot": {
+			type: 'string',
+    },
+    "htmlproofer": {
+      type: 'boolean',
+      default: true
+    },
+    "compare-snapshot": {
+      type: 'boolean',
+      default: true
+    }
+	}
+});
+
+let path = cli.flags["addSnapshot"];
+if (path){
+  tester.addSnapshot(path);
+}
+else {
+  const htmlproofer = cli.flags.htmlproofer;
+  const compareSnapshot = cli.flags.compareSnapshot;
+
+  tester.test({htmlproofer, compareSnapshot});
+}
