@@ -50,10 +50,10 @@ try {
   });
 }
 catch(err){
-  LOG(`Failed with expected error ${output}`);
+  LOG(`Failed with expected error`);
 }
 
-SECTION('Clean up');
+SECTION('All good. Cleaning up');
 execSync('rm -rf snapshot public/ node_modules/ build/ package-lock.json', {
   cwd: './test/huwent'
 });
