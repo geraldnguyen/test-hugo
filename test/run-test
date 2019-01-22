@@ -1,0 +1,73 @@
+#! /usr/bin/env node
+
+const chalk = require('chalk');
+const execSync = require('child_process').execSync;
+
+SECTION('Install dependencies');
+execSync('npm install', {
+  cwd: './test/huwent'
+});
+
+SECTION ('Run Hugo build');
+execSync('npm run build', {
+  cwd: './test/huwent'
+});
+
+try {
+  SECTION('Run htmlproofer, will fail on example.org link')
+  execSync('npm run test-hugo -- --compare-snapshot false', {
+    cwd: './test/huwent'
+  });
+}
+catch(err)
+{
+  const errText = err.toString();
+  if (/example\.org/.test(errText)) {
+    LOG(`Failed with expected error`);
+  }
+  else {
+    throw err;
+  }
+}
+
+SECTION ('Create snapshots')
+execSync('npm run test-hugo -- --add-snapshot posts/helloworld; ls snapshot/posts/helloworld/ ', {
+  cwd: './test/huwent'
+});
+
+SECTION('Compare snapshots, skip htmlproofer');
+execSync('npm run test-hugo -- --htmlproofer false', {
+  cwd: './test/huwent'
+});
+LOG("All snapshots match!");
+
+
+SECTION('Test unmatched snapshots, skip htmlproofer');
+let output = null;
+try {
+  output = execSync('echo youshallnotpass >> snapshot/posts/helloworld/index.html; npm run test-hugo -- --htmlproofer false', {
+    cwd: './test/huwent'
+  });
+}
+catch(err){
+  LOG(`Failed with expected error ${output}`);
+}
+
+SECTION('Clean up');
+execSync('rm -rf snapshot public/ node_modules/ build/ package-lock.json', {
+  cwd: './test/huwent'
+});
+
+
+
+function SECTION(text) {
+  console.log(chalk.blue.bold.bgYellow(text));
+}
+
+function ERROR(err){
+  console.log(chalk.bold.red(err));
+}
+
+function LOG(err) {
+  console.log(chalk.bold.blue(err));
+}

@@ -1,0 +1,22 @@
+{
+  "name": "huwent",
+  "version": "1.0.0",
+  "description": "Hugo get tested",
+  "main": "index.js",
+  "scripts": {
+    "hugo": "hugo server -D",
+    "build": "hugo -D",
+    "test-hugo": "test-hg"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "test-hugo": "file:../.."
+  },
+  "test-hugo": {
+    "options": "-D",
+    "diff": "--brief -b",
+    "snapshotFailfast": false,
+    "htmlproofer": "/usr/local/lib/ruby/gems/2.6.0/bin/htmlproofer"
+  }
+}

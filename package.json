@@ -4,10 +4,14 @@
   "description": "Snapshot testing for Hugo Static Site Generation",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/run-test"
   },
   "bin": {
     "test-hg": "./bin/test-hugo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geraldnguyen/test-hugo.git"
   },
   "keywords": [
     "hugo",
@@ -19,6 +23,7 @@
   "author": "Nguyen The Huy (https://github.com/geraldnguyen)",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^2.4.2",
     "meow": "^5.0.0",
     "shelljs": "^0.8.3"
   }

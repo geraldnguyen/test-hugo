@@ -50,7 +50,9 @@ function run_hugo(options){
 }
 
 function run_htmlproofer(options = "public") {
-  return shell.exec("./htmlproofer.sh " + options);
+  const htmlproofer = getConfig().htmlproofer || "htmlproofer";
+  console.log("Runtime: " + htmlproofer);
+  return shell.exec(htmlproofer + " " + options);
 }
 
 module.exports = {

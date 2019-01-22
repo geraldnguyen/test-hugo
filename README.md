@@ -3,7 +3,7 @@ Automated Testing for Hugo site
 
 # Install and Usages
 ```
-npm install test-hugo -g
+npm install test-hugo --saveDev
 ```
 
 Sample `package.json`:

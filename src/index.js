@@ -72,8 +72,8 @@ function compareSnapshot(){
     return 0;
   }
   else {
-    helper.echo("Some snapshots did not matches");
-    mismatches.forEach(file => helper.echo("\t" + file));
+    console.error("Some snapshots did not match");
+    mismatches.forEach(file => console.error("\t" + file));
     return 1;
   }
 
