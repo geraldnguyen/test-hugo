@@ -2,7 +2,6 @@ language: node_js
 node_js:
   - "node"
 before_install:
-  - sudo apt-get update
-  - sudo apt-get install -y hugo
+  - snap install hugo
   - gem install html-proofer
   - which htmlproofer
