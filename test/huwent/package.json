@@ -17,7 +17,6 @@
   "test-hugo": {
     "options": "-D",
     "diff": "--brief -b",
-    "snapshotFailfast": false,
-    "htmlproofer": "/usr/local/lib/ruby/gems/2.6.0/bin/htmlproofer"
+    "snapshotFailfast": false
   }
 }
